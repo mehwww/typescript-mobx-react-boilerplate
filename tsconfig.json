@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "jsx": "preserve",
+    "noUnusedLocals": true,
+    "target": "es6",
+    "lib": [
+      "dom",
+      "es7"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
+  },
+  "include":[
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
