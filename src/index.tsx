@@ -25,7 +25,7 @@ const render = (App: React.ComponentClass) => {
   );
 };
 
-bootstrap()
+bootstrap(rootStore)
   .then(() => {
     render(Root);
   });
