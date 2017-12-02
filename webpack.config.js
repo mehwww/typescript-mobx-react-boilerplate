@@ -15,6 +15,9 @@ const replacePlugin = (plugins, plugin, name) => {
 }
 
 module.exports = (config, env) => {
+  if (env !== 'production') {
+    config.entry.index.unshift('react-hot-loader/patch');
+  }
   replacePlugin(config.plugins, new HtmlWebpackPlugin({
     template: 'src/index.ejs',
     inject: true,

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { inject, observer } from 'mobx-react';
+import { GlobalStore } from '@/store';
 
 const Root = styled.div`
   font-family: Georgia, sans-serif;
@@ -10,6 +12,7 @@ const Root = styled.div`
     font-size: 2.5rem;
     font-weight: normal;
     letter-spacing: -1px;
+    color: red;
   }
 
   .welcome {
@@ -30,14 +33,36 @@ const Root = styled.div`
   }
 `;
 
-interface IndexPageProps {}
+interface IndexPageStore {
+  globalStore?: GlobalStore;
+}
+interface IndexPageProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
 interface IndexPageState {}
 
-class IndexPage extends Component<IndexPageProps, IndexPageState> {
+@inject('globalStore')
+@observer
+class IndexPage extends Component<IndexPageProps & IndexPageStore, IndexPageState> {
+  interval: NodeJS.Timer;
+
+  componentDidMount() {
+    this.interval = setInterval(() => {
+      this.props.globalStore!.addOne();
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
+    const { className, style, globalStore } = this.props;
     return (
-      <Root>
-        <h1 className="title">Yay! Welcome!</h1>
+      <Root className={className} style={style}>
+        <h1 className="title">Yay! Welcome!!!</h1>
+        <h1 className="title">{globalStore!.count}</h1>
         <div className="welcome" />
         <ul className="list">
           <li>To get started, edit <code>src/index.js</code> and save to reload.</li>
