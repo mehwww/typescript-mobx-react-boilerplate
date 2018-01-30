@@ -14,14 +14,14 @@ const replacePlugin = (plugins, plugin, name) => {
   }
 }
 
-module.exports = (config, env) => {
-  if (env !== 'production') {
+module.exports = (config) => {
+  if (process.env.NODE_ENV !== 'production') {
     config.entry.index.unshift('react-hot-loader/patch');
   }
   replacePlugin(config.plugins, new HtmlWebpackPlugin({
     template: 'src/index.ejs',
     inject: true,
-    minify: env !== 'production' ? false : {
+    minify: process.env.NODE_ENV !== 'production' ? false : {
       // removeAttributeQuotes: true,
       // collapseWhitespace: true,
       html5: true,
