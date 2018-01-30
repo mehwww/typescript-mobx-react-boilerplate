@@ -40,8 +40,8 @@ export {
   rootStore,
   history,
   RootStore,
-  GlobalStore,
   RouterStore,
+  GlobalStore,
 };
 
 // disable HMR for store
